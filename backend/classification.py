@@ -6,7 +6,7 @@ from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report
 
 # Load the dataset
-file_path = r"C:\Users\T Venu Madhav\OneDrive\Desktop\Hackathon 2\classification dataset.xlsx"
+file_path = "../classification dataset.xlsx"
 df = pd.read_excel(file_path)
 
 # Verify the dataset

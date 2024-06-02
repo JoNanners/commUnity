@@ -6,7 +6,7 @@ from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report
 
 # Load the dataset from Excel file
-file_path = r"C:\Users\T Venu Madhav\OneDrive\Desktop\Hackathon 2\sentiment analysis.xlsx"
+file_path = "../sentiment analysis.xlsx"
 df = pd.read_excel(file_path)
 
 # Display the first few rows of the dataframe to understand its structure
