@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Complaint</title>
+    <link rel="stylesheet" href="../css/create-complaint.css">
+</head>
+<body>
+    <div class="content-section">
+        <h2>Create Complaint</h2>
+        <form id="createComplaintForm">
+            <label for="complaint-about">Complaint About:</label>
+            <input type="text" id="complaint-about" required><br>
+
+            <label for="complaint-description">Complaint Description:</label><br>
+            <textarea id="complaint-description" rows="4" required></textarea><br>
+
+            <label for="person-name">Person Name:</label>
+            <input type="text" id="person-name" required><br>
+
+            <label for="flat-no">Flat No:</label>
+            <input type="text" id="flat-no" required><br>
+
+            <label for="phone-no">Phone No:</label>
+            <input type="tel" id="phone-no" required><br>
+
+            <button type="submit">Submit</button>
+            <button type="button" onclick="goBack()">Back</button>
+        </form>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        document.getElementById("createComplaintForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            // TODO: Submit the complaint
+            alert("Complaint submitted.");
+            goBack();
+        });
+    </script>
+</body>
+</html>

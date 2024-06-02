@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CommUnity Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Comm<span>U</span>nity</h1>
+    </header>
+    <div class="container">
+        <div class="form-container sign-up-container">
+            <form id="signupForm">
+                <h1>Create Account</h1>
+                <input type="text" placeholder="Name" required />
+                <!-- <input type="number" placeholder="Age" required /> -->
+                <input type="text" placeholder="Flat No" required />
+                <input type="tel" placeholder="Phone Number" required />
+                <p>Please upload your photo</p>
+                <input type="file" accept="image/*" required />
+                <select required>
+                    <option value="" disabled selected>Select Profession</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="engineer">Engineer</option>
+                    <option value="electrician">Electrician</option>
+                    <option value="business_man">Business Man</option>
+                    <option value="plumber">Plumber</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="lawyer">Lawyer</option>
+                    <option value="artist">Artist</option>
+                    <option value="student">Student</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Password" required />
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form id="loginForm">
+                <h1>Sign in</h1>
+                <input type="text" id="userId" placeholder="User ID" required />
+                <input type="password" placeholder="Password" id ="password" required />
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <h3>Had an account, just sign in</h3>
+                    <br>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello!</h1>
+                    <h3>Join Our CommUnity with just few clicks</h3>
+                    <br>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 CommUnity. All rights reserved. Designed and Developed by CodingManiacs</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

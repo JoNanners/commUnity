@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints</title>
+    <link rel="stylesheet" href="../css/complaints.css">
+</head>
+<body>
+    <div class="content-section">
+        <h2>To Create a Complaint</h2>
+        <div class="create-complaint-box">
+            <button onclick="goToCreateComplaintPage()">Create Complaint</button>
+        </div>
+    </div>
+        <hr>
+    <div class="content-section">
+        <h2>Present Complaints</h2>
+        <div class="present-complaints-container" id="present-complaints"></div>
+    </div>
+
+    <script>
+        function goToCreateComplaintPage() {
+            window.location.href = "create-complaint.html";
+        }
+
+        // Sample data for present complaints (replace with actual data)
+        const presentComplaints = [
+            { id: 1, about: "Electricity", description: "Power outage in building C", personName: "John Doe", flatNo: "C-101", phoneNo: "1234567890", rectified: false },
+            { id: 2, about: "Water", description: "Leakage in the water pipe", personName: "Jane Smith", flatNo: "B-202", phoneNo: "9876543210", rectified: true }
+            // Add more complaints as needed
+        ];
+
+        // Display present complaints
+        const presentComplaintsContainer = document.getElementById("present-complaints");
+        presentComplaints.forEach(complaint => {
+            if (!complaint.rectified) { // Exclude rectified complaints
+                const complaintBox = document.createElement("div");
+                complaintBox.classList.add("complaint-box");
+                complaintBox.innerHTML = `
+                    <h3>Complaint About: ${complaint.about}</h3>
+                    <p>Description: ${complaint.description}</p>
+                    <p>Person Name: ${complaint.personName}</p>
+                    <p>Flat No: ${complaint.flatNo}</p>
+                    <p>Phone No: ${complaint.phoneNo}</p>
+                    <label for="checkbox${complaint.id}">Rectified: </label>
+                    <input type="checkbox" id="checkbox${complaint.id}" onchange="handleCheckboxChange(${complaint.id})">
+                `;
+                presentComplaintsContainer.appendChild(complaintBox);
+            }
+        });
+
+        function handleCheckboxChange(complaintId) {
+            const checkbox = document.getElementById(`checkbox${complaintId}`);
+            if (checkbox.checked) {
+                const confirmation = confirm("Are you sure you want to delete this complaint?");
+                if (confirmation) {
+                    alert("Complaint deleted.");
+                    // Remove the complaint box from the UI
+                    const complaintBox = document.getElementById(`complaint${complaintId}`);
+                    complaintBox.remove();
+                } else {
+                    checkbox.checked = false;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

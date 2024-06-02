@@ -1,0 +1,126 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #bfdbdd; /* Light grey background */
+    display: flex;
+    height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    background: #1d3a4d; /* Dark blue sidebar */
+    width: 250px;
+    height: 100vh;
+    padding-top: 20px;
+    color: white;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: white;
+}
+
+.sidebar-header h3 span {
+    color: #ff4081;
+}
+
+.sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    padding: 15px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.sidebar-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar-menu li:hover {
+    background: #1d3a4d; /* Dark blue hover */
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#live-board {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+iframe {
+    width: 100%;
+    height: calc(100vh - 120px);
+    border: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #1d3a4d; /* Dark blue */
+    color: #ffffff; /* White text */
+    text-align: center;
+    padding: 10px 0; /* Add padding for better spacing */
+}
+
+/* Add your CSS styles here */
+.wrapper {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.content-section {
+    margin-bottom: 20px;
+}
+
+.event {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.event:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event h3 {
+    margin-top: 0;
+}
+
+

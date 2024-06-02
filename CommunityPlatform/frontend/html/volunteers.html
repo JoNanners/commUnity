@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteers</title>
+    <link rel="stylesheet" href="../css/volunteers.css">
+</head>
+<body>
+    <div class="content-section">
+        <h2>Available Volunteers</h2>
+        <div id="volunteers-container">
+        </div>
+    </div>
+
+    <script>
+        // Sample data for volunteers (replace with actual data)
+        const volunteers = [
+            { name: "Alice Johnson", phone: "123-456-7890", skills: "First Aid, Event Management" },
+            { name: "Bob Smith", phone: "987-654-3210", skills: "Cooking, Public Speaking" },
+            { name: "Catherine Lee", phone: "456-789-0123", skills: "Fundraising, Social Media" }
+        ];
+
+        // Display volunteers
+        const volunteersContainer = document.getElementById("volunteers-container");
+        volunteers.forEach(volunteer => {
+            const volunteerBox = document.createElement("div");
+            volunteerBox.classList.add("volunteer-box");
+            volunteerBox.innerHTML = `
+                <h3>Name: ${volunteer.name}</h3>
+                <p>Phone Number: ${volunteer.phone}</p>
+                <p>Skills: ${volunteer.skills}</p>
+            `;
+            volunteersContainer.appendChild(volunteerBox);
+        });
+    </script>
+</body>
+</html>

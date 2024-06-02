@@ -1,0 +1,77 @@
+/* create-complaint.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f0f4f8; /* Light grey background */
+}
+
+.content-section {
+    background-color: #ffffff; /* White background */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    margin: 20px; /* Added margin for spacing */
+    padding: 20px; /* Added padding for spacing */
+}
+
+.content-section h2 {
+    margin-bottom: 10px; /* Added margin for spacing */
+}
+
+button {
+    background-color: #1d3a4d; /* Dark blue */
+    color: #ffffff; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Added padding for spacing */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+    margin-right: 10px; /* Added margin for spacing */
+}
+
+button:hover {
+    background-color: #0e2534; /* Darker blue on hover */
+}
+
+label {
+    margin-right: 10px; /* Added margin for spacing */
+}
+
+input[type="text"],
+input[type="tel"],
+textarea {
+    width: 100%; /* Full width */
+    padding: 8px; /* Added padding for spacing */
+    margin-bottom: 10px; /* Added margin for spacing */
+    border: 1px solid #ccc; /* Border */
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+    outline: none; /* Remove outline on focus */
+    border-color: #1d3a4d; /* Change border color on focus */
+}
+
+button[type="submit"] {
+    background-color: #4caf50; /* Green */
+}
+
+button[type="submit"]:hover {
+    background-color: #388e3c; /* Darker green on hover */
+}
+
+button[type="button"] {
+    background-color: #f44336; /* Red */
+}
+
+button[type="button"]:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}

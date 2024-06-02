@@ -1,56 +1,80 @@
-<!-- frontend/dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | CommUnity</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <h1>Dashboard</h1>
+    </header>
     <div class="container">
-        <h1>User Dashboard</h1>
-        <div id="userDetails"></div>
-        <button id="logout">Logout</button>
+        <h2>Manage Events</h2>
+        <button id="addEventButton">Add Event</button>
+        <table id="eventTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Event</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Event rows will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <h2>Complaints</h2>
+        <button id="addComplaintButton">Add Complaint</button>
+        <table id="complaintTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Complaint</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Complaint rows will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <h2>Discussion Forums</h2>
+        <button id="addDiscussionButton">Add Discussion</button>
+        <table id="discussionTable">
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Poll</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Discussion rows will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <h2>Volunteer Registration</h2>
+        <button id="registerVolunteerButton">Register as Volunteer</button>
+        <table id="volunteerTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Skills</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Volunteer rows will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <button id="logoutButton">Logout</button>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const token = localStorage.getItem('token');
-            console.log('Retrieved token:', token);  // Debug log
-            if (!token) {
-                alert('Not authorized. Please log in.');
-                window.location.href = 'login.html';
-                return;
-            }
-
-            try {
-                const response = await fetch('http://localhost:5000/api/user/me', {
-                    method: 'GET',
-                    headers: { 'x-auth-token': token }
-                });
-                console.log('Response status:', response.status);  // Debug log
-
-                if (!response.ok) throw new Error('Failed to fetch user details');
-                const user = await response.json();
-                console.log('User details:', user);  // Debug log
-                document.getElementById('userDetails').innerHTML = `
-                    <p>Name: ${user.name}</p>
-                    <p>Age: ${user.age}</p>
-                    <p>Flat Number: ${user.flatNumber}</p>
-                    <p>Skills: ${user.skills.join(', ')}</p>
-                `;
-            } catch (error) {
-                alert(error.message);
-                console.error('Error:', error);  // Debug log
-            }
-        });
-
-        document.getElementById('logout').addEventListener('click', () => {
-            localStorage.removeItem('token');
-            alert('Logged out successfully');
-            window.location.href = 'login.html';
-        });
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>

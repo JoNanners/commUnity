@@ -1,4 +1,5 @@
 // backend/controllers/userController.js
+
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -23,7 +24,7 @@ exports.registerUser = async (req, res) => {
             age,
             flatNumber,
             skills,
-            password // Ensure that the password is correctly included in the user object
+            password
         });
 
         const salt = await bcrypt.genSalt(10);
@@ -39,7 +40,7 @@ exports.registerUser = async (req, res) => {
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: 360000 },
+            { expiresIn: 3600 },
             (err, token) => {
                 if (err) throw err;
                 res.json({ token });
@@ -52,45 +53,47 @@ exports.registerUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-  const { flatNumber, password } = req.body;
+    const { flatNumber, password } = req.body;
 
-  try {
-    // Find user by flatNumber
-    let user = await User.findOne({ flatNumber });
-    if (!user) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+    try {
+        let user = await User.findOne({ flatNumber });
+        if (!user) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+
+        const payload = {
+            user: {
+                id: user.id
+            }
+        };
+
+        jwt.sign(
+            payload,
+            process.env.JWT_SECRET,
+            { expiresIn: 3600 },
+            (err, token) => {
+                if (err) throw err;
+                res.json({ token });
+            }
+        );
+    } catch (err) {
+        console.error(err.message);
+        console.log(err);
+        res.status(500).send('Server error');
     }
-
-    // Check if password matches
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
-    }
-
-    // Create JWT payload
-    const payload = {
-      user: {
-        id: user.id
-      }
-    };
-
-    // Generate JWT token
-    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
-      if (err) throw err;
-      res.json({ token });
-    });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
-  }
 };
 
 exports.getUserDetails = async (req, res) => {
-  try {
-      const user = await User.findById(req.user.id).select('-password');
-      res.json(user);
-  } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
-  }
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 };

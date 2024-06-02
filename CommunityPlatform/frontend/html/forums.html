@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Forums</title>
+    <link rel="stylesheet" href="../css/forums.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Discussion Forums</h2>
+        </div>
+        <div class="chat-window" id="chat-window">
+        </div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            { user: 'Alice', text: 'Hi everyone!' },
+            { user: 'Bob', text: 'Hello Alice!' },
+            { user: 'Catherine', text: 'How are you guys?' }
+        ];
+
+        function displayMessages() {
+            const chatWindow = document.getElementById('chat-window');
+            chatWindow.innerHTML = '';
+            messages.forEach(message => {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('chat-message');
+                messageDiv.innerHTML = `<strong>${message.user}:</strong> ${message.text}`;
+                chatWindow.appendChild(messageDiv);
+            });
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message-input');
+            const newMessage = messageInput.value.trim();
+            if (newMessage) {
+                messages.push({ user: 'You', text: newMessage });
+                messageInput.value = '';
+                displayMessages();
+            }
+        }
+
+        // Initial display of messages
+        displayMessages();
+    </script>
+</body>
+</html>

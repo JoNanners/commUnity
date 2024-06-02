@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="../css/event.css">
+</head>
+<body>
+    <div class="content-section">
+        <h2>Create Event</h2>
+        <button onclick="goToCreateEventPage()">Create Event</button>
+    </div>
+    
+    
+    <div class="content-section">
+        <h2>Upcoming Events</h2>
+        <div>
+            <label for="filter">Filter:</label>
+            <select id="filter" onchange="filterEvents()">
+                <option value="7">Next 7 Days</option>
+                <option value="15">Next 15 Days</option>
+            </select>
+        </div>
+        <div id="upcoming-events"></div>
+    </div>
+
+    <script src="../js/events.js"></script>
+    <script>
+        function goToCreateEventPage() {
+            window.location.href = "create-event.html";
+        }
+
+        function filterEvents() {
+            // TODO: Implement filtering logic
+            // This function will filter the events based on the selected filter value (7 or 15)
+            // and display the filtered events in the upcoming-events section
+            const filter = document.getElementById("filter").value;
+            console.log("Filter selected:", filter);
+        }
+    </script>
+</body>
+</html>
