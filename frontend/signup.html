@@ -31,22 +31,22 @@
             const skills = document.getElementById('skills').value.split(',').map(skill => skill.trim());
             const password = document.getElementById('password').value;
             
-            const response = await fetch('http://localhost:5000/api/users/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, age, flatNumber, skills, password })
-            });
-            
-            if (response.ok) {
+            try {
+                const response = await fetch('http://localhost:5000/api/user/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, age, flatNumber, skills, password })
+                });
+                console.log("response: ",response)
+                if (!response.ok) throw new Error('Registration failed');
                 alert('User registered successfully');
                 window.location.href = 'login.html';
-            } else {
-                const error = await response.json();
-                alert(error.msg);
+            } catch (error) {
+                console.log(error);
+                alert(error.message);
             }
         });
     </script>
 </body>
 </html>
+

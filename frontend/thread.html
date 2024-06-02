@@ -1,0 +1,82 @@
+<!-- frontend/thread.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thread | CommUnity</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="threadTitle">Thread Title</h1>
+        <div id="postsList"></div>
+        <form id="postForm">
+            <textarea id="content" placeholder="Write a post..." required></textarea>
+            <button type="submit">Post</button>
+        </form>
+        <a href="threads.html">Back to Threads</a>
+    </div>
+
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const threadId = urlParams.get('id');
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const threadResponse = await fetch(`http://localhost:5000/api/threads/${threadId}`);
+                if (!threadResponse.ok) throw new Error('Failed to fetch thread');
+                const thread = await threadResponse.json();
+                document.getElementById('threadTitle').innerText = thread.title;
+
+                const postsResponse = await fetch(`http://localhost:5000/api/threads/${threadId}/posts`);
+                if (!postsResponse.ok) throw new Error('Failed to fetch posts');
+                const posts = await postsResponse.json();
+                
+                const postsList = document.getElementById('postsList');
+                posts.forEach(post => {
+                    const postItem = document.createElement('div');
+                    postItem.innerHTML = `
+                        <p>${post.content}</p>
+                        <p>Posted by: ${post.createdBy.name}</p>
+                        <p>Date: ${new Date(post.date).toLocaleDateString()}</p>
+                    `;
+                    postsList.appendChild(postItem);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        });
+
+        document.getElementById('postForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const content = document.getElementById('content').value;
+            
+            try {
+                const response = await fetch(`http://localhost:5000/api/threads/${threadId}/posts`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({ content })
+                });
+
+                if (!response.ok) throw new Error('Failed to create post');
+                const post = await response.json();
+                const postItem = document.createElement('div');
+                postItem.innerHTML = `
+                    <p>${post.content}</p>
+                    <p>Posted by: ${post.createdBy.name}</p>
+                    <p>Date: ${new Date(post.date).toLocaleDateString()}</p>
+                `;
+                document.getElementById('postsList').appendChild(postItem);
+                document.getElementById('content').value = '';
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

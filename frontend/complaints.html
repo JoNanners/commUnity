@@ -1,0 +1,42 @@
+<!-- frontend/complaints.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints | CommUnity</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Public Complaints</h1>
+        <div id="complaintsList"></div>
+        <a href="dashboard.html">Back to Dashboard</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/complaints');
+                if (!response.ok) throw new Error('Failed to fetch complaints');
+                const complaints = await response.json();
+                const complaintsList = document.getElementById('complaintsList');
+
+                complaints.forEach(complaint => {
+                    const complaintItem = document.createElement('div');
+                    complaintItem.innerHTML = `
+                        <h2>${complaint.title}</h2>
+                        <p>${complaint.description}</p>
+                        <p>Filed by: ${complaint.createdBy.name}</p>
+                        <p>Date: ${new Date(complaint.date).toLocaleDateString()}</p>
+                    `;
+                    complaintsList.appendChild(complaintItem);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
+

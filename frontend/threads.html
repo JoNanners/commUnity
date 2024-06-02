@@ -1,0 +1,43 @@
+<!-- frontend/threads.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Threads | CommUnity</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Discussion Threads</h1>
+        <div id="threadsList"></div>
+        <a href="dashboard.html">Back to Dashboard</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/threads');
+                if (!response.ok) throw new Error('Failed to fetch threads');
+                const threads = await response.json();
+                const threadsList = document.getElementById('threadsList');
+
+                threads.forEach(thread => {
+                    const threadItem = document.createElement('div');
+                    threadItem.innerHTML = `
+                        <h2><a href="thread.html?id=${thread._id}">${thread.title}</a></h2>
+                        <p>Created by: ${thread.createdBy.name}</p>
+                        <p>Date: ${new Date(thread.date).toLocaleDateString()}</p>
+                    `;
+                    threadsList.appendChild(threadItem);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+

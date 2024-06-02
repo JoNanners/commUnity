@@ -1,0 +1,43 @@
+<!-- frontend/volunteers.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Opportunities | CommUnity</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Volunteer Opportunities</h1>
+        <div id="volunteersList"></div>
+        <a href="dashboard.html">Back to Dashboard</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/volunteers');
+                if (!response.ok) throw new Error('Failed to fetch opportunities');
+                const opportunities = await response.json();
+                const volunteersList = document.getElementById('volunteersList');
+
+                opportunities.forEach(opportunity => {
+                    const opportunityItem = document.createElement('div');
+                    opportunityItem.innerHTML = `
+                        <h2>${opportunity.title}</h2>
+                        <p>${opportunity.description}</p>
+                        <p>Date: ${new Date(opportunity.date).toLocaleDateString()}</p>
+                        <p>Location: ${opportunity.location}</p>
+                        <p>Organized by: ${opportunity.createdBy.name}</p>
+                    `;
+                    volunteersList.appendChild(opportunityItem);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
+
